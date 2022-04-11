@@ -1,0 +1,590 @@
+
+html, body{
+    margin:0;
+    padding:0;
+    height:100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+h1{
+    margin:0;
+    padding:0;
+}
+
+.body-container{
+    display: grid;
+    height:100%;
+}
+.body-container-header{
+    color:#eee;
+    text-align: center;
+    padding: 10px 20px;
+  background-color: rgb(28, 34, 99);
+  height:10vh;
+  display: grid;
+    grid-template-areas:
+    "navLeft navCenter navRight";
+}
+.body-container-main{
+    color:#eee;
+    height:80vh;
+
+    background: rgb(185, 186, 190);
+}
+.body-container-footer{
+
+    color:#eee;
+    background: rgb(28, 34, 99);
+    text-align: center;
+    padding: 10px 20px;
+
+  position:relative;
+  bottom:0;
+  height:10vh;
+
+}
+
+.header-left{
+    grid-area: navLeft;
+    align-self: center;
+}
+.header-center{
+    grid-area: navCenter;
+    align-self: center;
+}
+.header-right{
+    grid-area: navRight;
+    align-self: center;
+}
+.logo {
+    width: 40px;
+    float: left;
+    margin-right: 10px;
+}
+.logoName{
+    font-family: "Allenoire";
+    font-size: large;
+    float: left;
+    line-height: 2.5;
+}
+.upperWord{
+    color:#744d9f;
+}
+.button-registr{
+    float:right;
+}
+.navigation {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+}
+.navigation li {
+    display: inline;
+}
+.navigation a {
+    color:#fff;
+    padding: 0.75em;
+    text-decoration: none;
+    line-height: 2.5;
+    transition: .4s;
+}
+.navigation a:hover {
+
+    color: rgb(122, 85, 192)
+}
+.registr, .admin-btn{
+    color:white;
+    padding: 10px 30px;
+    border-radius: 25px;
+    border:0px solid;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .4s;
+}
+.registr{
+  background-color: rgb(122, 85, 192);
+}
+.registr:hover{
+    background-color: white;
+    color:rgb(122, 85, 192);
+    cursor: pointer;
+}
+.admin-btn{
+  background-color: #5e7ace;
+}
+.admin-btn:hover{
+  background-color: rgb(122, 85, 192);
+  color:rgb(255, 255, 255);
+  cursor: pointer;
+}
+.sectionTitle{
+    background: url("/public/images/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    background-position: center center;
+    box-shadow: inset 0 0 0 1000px rgba(28, 34, 99, 0.685);
+}
+.sectionTitle-title{
+    color:white;
+    text-align: center;
+    position: relative;
+    top: 20%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 50px;
+}
+.bg{
+    background: rgba(212, 212, 231, 0.685);
+}
+
+.modal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-upd{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+.modal-content {
+    position: relative;
+    background-color: #d8cce4;
+    margin: auto;
+    padding: 10px;
+    border: 5px solid #5e7ace;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+
+}
+.modalSubtask{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modalSubtask-upd{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content-subtask {
+  position: relative;
+    background-color: #d8cce4;
+    margin: auto;
+    padding: 10px;
+    border: 5px solid #5e7ace;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+.dash-subtask{
+  cursor: pointer;
+    position: relative;
+    display: block;
+    padding: 12px 8px 12px 20px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*float:right;*/
+    right: 0;
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid rgb(101, 111, 138);
+    border-radius: 10px;
+    border-top: 0px;
+    height: 70px;
+
+
+}
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+#myULTask {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Стиль элементов списка */
+  #myULTask .litask {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 30px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    margin-top: 15px;
+     /*сделайте элементы списка невыбираемыми */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border:1px solid rgb(19, 5, 54);
+    border-radius: 10px;
+      height: 70px;
+  }
+
+  /* Установить все нечетные элементы списка в другой цвет (зебра) */
+  #myULTask .litask:nth-child(odd) {
+    background: #f9f9f9;
+  }
+
+  /* Более темный фон-цвет при наведении */
+  #myULTask .litask:hover {
+    background: #ddd;
+  }
+
+  /* При нажатии на кнопку, добавить цвет фона и вычеркнуть текст */
+  #myULTask .litask.checked {
+    background: #888;
+    color: #fff;
+    text-decoration: line-through;
+  }
+
+  /* Добавить "checked" отметить при нажатии на кнопку */
+  #myULTask .litask.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+  }
+
+  /* Стиль кнопки "Закрыть" */
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+    border-radius: 10px;
+      height: 69px;
+  }
+  .update{
+      position: absolute;
+      right: 40px;
+      top: 0;
+      border-radius: 10px;
+      height: 69px;
+      width: 41px;
+  }
+    .update:hover {
+        background-color: #b000ff;
+        color: #000000;
+    }
+
+  .close:hover {
+    background-color: #f44336;
+    color: white;
+  }
+  .container-board {
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+      height: 500px;
+  }
+  .block-board{
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #cccccc;
+    width: 350px;
+    min-height: 500px;
+    margin-right: 15px;
+    border-radius: 10px;
+  }
+  .column3{
+    margin-right: 0;
+  }
+
+  .list-group {
+    min-height: 100px;
+    height: 100%;
+    padding:5px 20px 40px 20px;
+  }
+  .list-group li{
+    list-style: none;
+    margin:15px 0 5px 0;
+    cursor: pointer;
+    background-color: rgba(122, 85, 192, 0.548);
+    color:rgb(255, 255, 255);
+    padding: 10px 30px;
+    border-radius: 25px;
+    border:0px solid;
+    word-break: break-all;
+    min-height:40px;
+
+  }
+  .column2 li {
+    background-color: rgba(46, 34, 109, 0.781);
+  }
+  .column3 li{
+    background-color: rgb(30, 41, 65);
+  }
+
+.container_slider_css{
+    margin:50px auto;
+    width:500px;
+    height:300px;
+    overflow:hidden;
+    position:relative;
+    top:100px;
+}
+#formTask{
+  display: inline;
+
+}
+
+.table {
+	display: table;
+	width: 100%;
+	box-sizing: border-box;
+	border-collapse: collapse;
+	empty-cells: show;
+    margin-top:30px;
+}
+.table-caption {
+	display: table-caption;
+	padding: 10px;
+	color: #333;
+	font-size: 16px;
+	text-align: center;
+}
+.table-colgroup {
+	display: table-column-group;
+}
+.table-col {
+	display: table-column;
+}
+.table-thead {
+	display: table-header-group;
+}
+.table-tbody {
+	display: table-row-group;
+}
+.table-tfoot {
+	display: table-footer-group;
+}
+.table-tr {
+	display: table-row;
+}
+.table-tr:nth-child(odd) {
+  background: #ebf3f9;
+}
+.table-tr:nth-child(even) {
+  background: #dae1e6;
+}
+.table-th {
+	display: table-cell;
+	border: 1px solid rgb(59, 59, 59);
+	font-weight: bold;
+	text-align: left;
+  box-shadow: inset 0 1px 0 #999999, inset 0 -1px 0 #999999;
+  background: linear-gradient(#7f9cf5, rgb(17 24 39));
+  color: white;
+  padding: 10px 15px;
+}
+.table-td {
+	display: table-cell;
+	padding: 10px;
+	border: 1px solid rgba(79, 88, 170, 0.801);
+}
+
+.fa-del{
+  color:red;
+}
+.fa-del:hover{
+  border-bottom: 1px solid #ff0000;
+}
+.fa-pencil{
+  color:rgb(0, 26, 255);
+}
+.fa-pencil:hover{
+  border-bottom: 1px solid rgb(0, 26, 255);
+}
+.fa-eye{
+  color:rgb(30, 129, 21);
+}
+.fa-eye:hover{
+  border-bottom: 1px solid rgb(30, 129, 21);
+}
+.adminFormAddTask{
+  width:50%;
+  margin:0 auto;
+}
+
+#calendar2 {
+    width: 100%;
+    font: monospace;
+    line-height: 1.2em;
+    font-size: 15px;
+    text-align: center;
+    border-collapse: collapse;
+}
+#calendar2 thead tr:last-child {
+    font-size: small;
+    color: rgb(85, 85, 85);
+}
+#calendar2 thead tr:nth-child(1){
+    font-size: 23px;
+}
+#calendar2 thead tr:nth-child(1) td{
+    padding-bottom: 30px;
+}
+#calendar2 thead tr:nth-child(1) td:nth-child(2) {
+    color: rgb(50, 50, 50);
+}
+#calendar2 thead tr:nth-child(1) td:nth-child(1), #calendar2 thead tr:nth-child(1) td:nth-child(3){
+    font-size: 40px;
+    color: #4a5568;
+}
+#calendar2 thead tr:nth-child(1) td:nth-child(1):hover, #calendar2 thead tr:nth-child(1) td:nth-child(3):hover {
+    cursor: pointer;
+}
+#calendar2 tbody td {
+    color: rgb(0, 0, 0);
+    padding: 20px 10px;
+    border: 1px solid #c4c2c2;
+    cursor: pointer;
+    transition: .5s;
+    width: 10vw;
+}
+#calendar2 tbody td:hover {
+    background-color: #d0cfcf;
+    transition: .5s;
+}
+#calendar2 tbody td:nth-child(n+6), #calendar2 .holiday {
+    color: rgb(231, 140, 92);
+}
+#calendar2 tbody td.today {
+    background: rgb(93, 5, 131);
+    color: #fff;
+    transition: .5s;
+}
+#calendar2 tbody td.today:hover {
+    background-color: rgb(125, 3, 178);
+    transition: .5s;
+}
+.spanDay {
+    float: right;
+}
+.calendar_task{
+    float: left;
+}
+.calendar_task:hover{
+    color: #744d9f;
+}
+.today.calendar_task:hover{
+    color: #e5cdff;
+}
+.modal_task_calendar{
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto;
+}
+.modal_task_content{
+    width: 20vw;
+    min-height: 10vh;
+    border: 1px solid #696868;
+    border-radius: 5px;
+    background-color: white;
+    position: fixed;
+    padding: 5px;
+}
+.error{
+    font-size: 14px;
+    color: red;
+}
+.modal-content-task{
+    padding: 5px;
+    background-color: #d5cdde;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.executor_block{
+    position: relative;
+}
+.executor_block ul{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #8e849a;
+    box-shadow: 0px 0px 3px 1px #654e81;
+    z-index: 100;
+}
+.executor_block ul li:hover{
+    background-color: #d3c7de;
+    transition: all 0.5s ease;
+}
+.executor_block ul li{
+    padding: 5px;
+    transition: all 0.5s ease;
+}
