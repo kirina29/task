@@ -139,7 +139,7 @@ h1{
 }
 
 .modal{
-    display: none; 
+    display: none;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */
@@ -558,7 +558,7 @@ h1{
 }
 .error{
     font-size: 14px;
-    color: red;
+    color: #e70000;
 }
 .modal-content-task{
     padding: 5px;
