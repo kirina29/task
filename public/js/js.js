@@ -67,7 +67,9 @@ for (let up of updateSub) {
             execut.remove()
         })
         for(let i=0; i<up.children.length;i++){
-            before.insertAdjacentHTML('afterend', `<div class="form-group executor_div">
+            console.log(up.children[i].dataset.name + i)
+            if((up.children.length-1)==i){
+                before.insertAdjacentHTML('afterend', `<div class="form-group executor_div">
                                 <label for="form-users">Исполнитель</label>
                                 <div class="executor_block">
                                     <input type="hidden" name="executor[]" value="${up.children[i].dataset.id}">
@@ -77,6 +79,22 @@ for (let up of updateSub) {
                                     </ul>
                                 </div>
                             </div>`)
+            }
+            else{
+                before.insertAdjacentHTML('afterend', `<div class="form-group executor_div">
+                                <label for="form-users">Исполнитель</label>
+                                <div class="executor_block">
+                                    <button class="remove_execut" onclick="remove_execut(event)">x</button>
+                                    <input type="hidden" name="executor[]" value="${up.children[i].dataset.id}">
+                                    <input type="text" id="executor" name="executNameUpdSub" class="form-control block mt-1 w-full execut_in" value="${up.children[i].dataset.name}" oninput="executors(event)" onfocus="executors(event)">
+                                    <ul class="executor_ul">
+
+                                    </ul>
+                                </div>
+                            </div>`)
+
+            }
+
         }
         modalSubtaskUpd.style.display = "block";
     }
@@ -132,7 +150,7 @@ async function executors(event){
                     n=0
                     if (event.target.value.trim()==data[i].name){
                         event.target.previousElementSibling.value=data[i].id
-                        console.log('ii')
+
                     }
                     for(let j=0; j<ulAll.length;j++){
                         if(ulAll[j].value.trim()==data[i].name.trim()){
@@ -173,13 +191,18 @@ function addExecut(event){
     event.target.parentNode.insertAdjacentHTML('beforebegin', `<div class="form-group">
                                 <label for="form-users">Исполнитель</label>
                                 <div class="executor_block">
+                                    <button class="remove_execut" onclick="remove_execut(event)">x</button>
                                     <input type="hidden" name="executor[]">
                                     <input type="text" id="executor" class="form-control block mt-1 w-full" oninput="executors(event)" onfocus="executors(event)">
                                     <ul class="executor_ul">
 
                                     </ul>
                                 </div>
-                            </div>`)
+                            </div>
+                           `)
+}
+function remove_execut(event){
+    event.target.parentNode.parentNode.remove()
 }
 
 

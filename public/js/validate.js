@@ -131,8 +131,11 @@ function addSub(){
         error="Название должно быть заполнено"
         validator.name=error
     }
-
-
+    if(form.elements['executName'].value=="")
+    {
+        error= "Исполнитель должен быть выбран"
+        validator.executName=error
+    }
     if(form.elements['deadline_date'].value>form.dataset.deadline || form.elements['deadline_date'].value=="")
     {
         error="Дата должна входить в диапазон даты задачи!(измените дату дедлайна)"
@@ -181,7 +184,11 @@ function upSub(){
         error="Название должно быть заполнено"
         validator.name=error
     }
-
+    if(form.elements['executName'].value=="" || !form.elements['executName'])
+    {
+        error= "Исполнитель должен быть выбран"
+        validator.executName=error
+    }
 
     if(form.elements['deadline_date'].value>form.dataset.deadline || form.elements['deadline_date'].value=="")
     {
