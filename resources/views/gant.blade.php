@@ -146,7 +146,6 @@
                                         this.name.toUpperCase() + "<span>";
                                     var childText = "<span style='color:#7a708a'>" + customField +
                                         this.name + ": " + duration + " дней</span>";
-
                                     // identify the resource type and display the corresponding text
                                     if (numChildren > 0) {
                                         return parentText;
