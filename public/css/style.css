@@ -588,3 +588,12 @@ h1{
     padding: 5px;
     transition: all 0.5s ease;
 }
+.remove_execut{
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+    position: absolute;
+    top: 0;
+    right: -20px;
+    font-size: 25px;
+}

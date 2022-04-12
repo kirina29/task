@@ -211,6 +211,7 @@
                             <div class="flex items-center justify-center mt-2">
                                 <button class="btn btn-success ml-2" type="button" onclick="addExecut(event)">Добавить исполнителя</button>
                             </div>
+                            <p class="error" id="executName"></p>
                             <div class="flex items-center justify-end mt-4">
                                 <x-button class="btn btn-success ml-3" type="submit">Добавить подзадачу</x-button>
                             </div>
@@ -237,19 +238,10 @@
                                 <input type="date" class="form-control block mt-1 w-full" value="{{old('deadline_date')}}" name="deadline_dateUpdSub" id="form-deadline_date" placeholder="Дата сдачи задачи">
                             </div>
                             <p class="error beforeExecut" id="deadline_date"></p>
-{{--                            <div class="form-group">--}}
-{{--                                <label for="form-users">Исполнитель</label>--}}
-{{--                                <div class="executor_block">--}}
-{{--                                    <input type="hidden" name="executor[]">--}}
-{{--                                    <input type="text" id="executor" name="executNameUpdSub" class="form-control block mt-1 w-full execut_in" oninput="executors(event)" onfocus="executors(event)">--}}
-{{--                                    <ul class="executor_ul">--}}
-
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <div class="flex items-center justify-center mt-2">
                                 <button class="btn btn-success ml-2" type="button" onclick="addExecut(event)">Добавить исполнителя</button>
                             </div>
+                            <p class="error" id="executName"></p>
                             <div class="flex items-center justify-end mt-4">
                                 <x-button class="btn btn-success ml-3" type="submit">Изменить подзадачу</x-button>
                             </div>

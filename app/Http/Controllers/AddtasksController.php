@@ -89,7 +89,7 @@ class AddtasksController extends Controller
         $temp1=$request->name;
         $temp4=$request->start_date;
         $temp5=$request->deadline_date;
-
+        $execut=[];
         $q=Subtasks::create([
             'name'=>$temp1,
             'start_date'=>$temp4,
@@ -97,7 +97,12 @@ class AddtasksController extends Controller
             'id_tasks'=>$id,
             'id_statuses' => "1",
          ]);
-        $q->users()->attach($request->executor);
+        foreach ($request->executor as $ex){
+            if($ex!=null){
+                array_push($execut, $ex);
+            }
+        }
+        $q->users()->attach($execut);
          return redirect()->route('dashboard');
 
         }
@@ -106,13 +111,19 @@ class AddtasksController extends Controller
         $start=$request->start_dateUpdSub;
         $deadline=$request->deadline_dateUpdSub;
         $subtask=Subtasks::find($id);
+        $execut=[];
         $subtask->update([
             'name'=>$name,
             'deadline_date'=>$deadline,
             'start_date'=>$start
         ]);
+        foreach ($request->executor as $ex){
+            if($ex!=null){
+                array_push($execut, $ex);
+            }
+        }
         $subtask->users()->detach();
-        $subtask->users()->attach($request->executor);
+        $subtask->users()->attach($execut);
         return redirect()->route('dashboard');
     }
     public function uptask(Request $request, $id){
