@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Flags extends Model
 {
     use HasFactory;
+
+    public function tasks()
+    {
+        return $this->hasMany(Tasks::class, 'id_flags');
+    }
 }

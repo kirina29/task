@@ -58,15 +58,12 @@ function Calendar2(id, year, month) {
     let modal_task_content=document.querySelector('.modal_task_content')
     for (let calenT of calendar_task) {
         calenT.onclick = function(event) {
-            console.log(calenT)
             event.stopPropagation();
             let pos=event.target.getBoundingClientRect()
             let position={
                 top:pos.top + pageYOffset,
                 left:pos.left + pageYOffset
             }
-            console.log(position.top)
-            console.log(position.left)
             modal_task_content.style.top=position.top+'px'
             modal_task_content.style.left=position.left+'px'
             modal_task.style.display='block'
@@ -75,17 +72,37 @@ function Calendar2(id, year, month) {
             {
                 if(task[i].start_date==calenT.parentNode.dataset.dateTd)
                 {
-                    modal_task_content.insertAdjacentHTML("beforeend", `<p class="modal-content-task" onclick="event.stopPropagation();">${task[i].name}</p>`)
+                    modal_task_content.insertAdjacentHTML("beforeend", `<div class="modal-content-task" onclick="event.stopPropagation();">
+                                                                                         <div class="tooltip_subtask" style="width: 90%; right: auto; left: auto">
+                                                                                            <p>Описание: ${task[i].descriptions}</p>
+                                                                                            <p>Дата начала: ${task[i].start_date}</p>
+                                                                                            <p>Дата дедлайна: ${task[i].deadline_date}</p>
+                                                                                         </div>
+                                                                                        ${task[i].name}
+                                                                                    </div>`)
                 }
             }
-
+            let opentool=modal_task_content.querySelectorAll('.modal-content-task')
+            console.log(opentool)
+            for (let t of opentool) {
+                t.onmouseover=function () {
+                    console.log('aa')
+                    t.children[0].style.opacity='1'
+                    t.children[0].style.visibility='visible'
+                }
+                t.onmouseout=function () {
+                    t.children[0].style.opacity='0'
+                    t.children[0].style.visibility='hidden'
+                    t.children[0].style.transition= '0.2s ease-in-out';
+                }
+            }
         }
     }
-    window.onclick = function(event) {
+    document.body.onclick = function(event) {
+        console.log('ff')
         console.log(event.target)
         if (event.target == modalCalendar) {
             modalCalendar.style.display = "none";
-
         }
         if(event.target==modal_task){
             modal_task.style.display = "none";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 10 2022 г., 13:42
+-- Время создания: Апр 13 2022 г., 15:13
 -- Версия сервера: 5.7.33
 -- Версия PHP: 8.0.8
 
@@ -30,10 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `comments` (
   `id` int(10) UNSIGNED NOT NULL,
   `textcomment` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_tasks` int(10) UNSIGNED DEFAULT NULL,
+  `id_subtasks` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`id`, `textcomment`, `id_subtasks`, `created_at`, `updated_at`) VALUES
+(1, 'qwerty', 42, '2022-04-13 05:19:24', '2022-04-13 05:19:24'),
+(2, 'Хочу питсу', 42, '2022-04-13 07:03:52', '2022-04-13 07:03:52');
 
 -- --------------------------------------------------------
 
@@ -64,19 +72,14 @@ CREATE TABLE `flags` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Структура таблицы `flags_tasks`
+-- Дамп данных таблицы `flags`
 --
 
-CREATE TABLE `flags_tasks` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `id_flags` int(10) UNSIGNED DEFAULT NULL,
-  `id_tasks` int(10) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `flags` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Срочно', NULL, NULL),
+(2, 'Важно', NULL, NULL),
+(3, 'Несущественно', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -215,13 +218,11 @@ CREATE TABLE `subtasks` (
 --
 
 INSERT INTO `subtasks` (`id`, `name`, `start_date`, `deadline_date`, `id_tasks`, `id_statuses`, `created_at`, `updated_at`) VALUES
-(12, 'ааа', '2022-03-19', '2022-03-27', 14, 1, '2022-03-19 02:59:59', '2022-03-19 02:59:59'),
 (21, 'Подзадача Таси', '2022-04-15', '2022-04-21', 17, 1, '2022-03-31 22:47:08', '2022-03-31 22:47:08'),
 (23, 'ф', '2022-04-14', '2022-04-22', 17, 1, '2022-03-31 22:49:36', '2022-03-31 22:49:36'),
 (42, 'Подзадача1', '2022-04-09', '2022-04-20', 21, 1, NULL, '2022-04-10 05:15:13'),
 (44, 'qqq', '2022-04-10', '2022-04-15', 21, 1, '2022-04-10 03:34:31', '2022-04-10 05:16:38'),
-(45, 'ertt', '2022-04-11', '2022-04-13', 21, 1, '2022-04-10 03:34:55', '2022-04-10 03:34:55'),
-(46, 'ertt', '2022-04-11', '2022-04-13', 21, 1, '2022-04-10 03:34:55', '2022-04-10 03:34:55');
+(58, 'qwertty', '2022-04-12', '2022-04-15', 21, 1, '2022-04-12 06:48:55', '2022-04-12 06:48:55');
 
 -- --------------------------------------------------------
 
@@ -239,6 +240,7 @@ CREATE TABLE `tasks` (
   `id_statuses` int(10) UNSIGNED DEFAULT NULL,
   `id_spaces` int(10) UNSIGNED DEFAULT NULL,
   `id_users` bigint(20) UNSIGNED NOT NULL,
+  `id_flags` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -247,12 +249,12 @@ CREATE TABLE `tasks` (
 -- Дамп данных таблицы `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `name`, `descriptions`, `price`, `start_date`, `deadline_date`, `id_statuses`, `id_spaces`, `id_users`, `created_at`, `updated_at`) VALUES
-(14, 'вторая', 'ааа', '234.00', '2022-03-19', '2022-03-26', 1, 1, 3, NULL, '2022-04-04 02:52:55'),
-(17, 'Задача 1', 'з', '13.00', '2022-04-09', '2022-04-29', 1, 1, 5, NULL, NULL),
-(21, 'q', 'q', '100.00', '2022-04-08', '2022-04-30', 1, 1, 4, NULL, NULL),
-(22, 'Новая задачка', 'новая задачка', '130.00', '2022-04-03', '2022-04-13', 2, 1, 4, NULL, '2022-04-10 05:14:02'),
-(23, 'qweww', 'qweqe', '150.00', '2022-04-23', '2022-05-21', 1, 1, 4, NULL, NULL);
+INSERT INTO `tasks` (`id`, `name`, `descriptions`, `price`, `start_date`, `deadline_date`, `id_statuses`, `id_spaces`, `id_users`, `id_flags`, `created_at`, `updated_at`) VALUES
+(17, 'Задача 1', 'з', '13.00', '2022-04-09', '2022-04-29', 1, 1, 5, NULL, NULL, NULL),
+(21, 'q', 'q', '100.00', '2022-04-08', '2022-04-30', 2, 1, 4, 1, NULL, '2022-04-13 05:54:43'),
+(22, 'Новая задачка', 'новая задачка', '130.00', '2022-04-03', '2022-04-13', 1, 1, 4, 2, NULL, '2022-04-13 05:54:40'),
+(23, 'qweww', 'qweqe', '150.00', '2022-04-23', '2022-05-21', 2, 1, 4, NULL, NULL, '2022-04-13 05:54:33'),
+(24, 'Новая задача2', 'йцукк', '123.00', '2022-04-04', '2022-04-22', 1, 1, 4, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -301,17 +303,13 @@ CREATE TABLE `users_subtasks` (
 --
 
 INSERT INTO `users_subtasks` (`id`, `id_users`, `id_subtasks`, `created_at`, `updated_at`) VALUES
-(8, 2, 12, NULL, NULL),
 (17, 6, 21, NULL, NULL),
 (19, 6, 23, NULL, NULL),
-(43, 6, 45, NULL, NULL),
-(44, 3, 45, NULL, NULL),
-(45, 6, 46, NULL, NULL),
-(46, 3, 46, NULL, NULL),
-(47, 3, 42, NULL, NULL),
-(48, 2, 42, NULL, NULL),
 (49, 2, 44, NULL, NULL),
-(50, 3, 44, NULL, NULL);
+(50, 3, 44, NULL, NULL),
+(71, 3, 58, NULL, NULL),
+(73, 2, 42, NULL, NULL),
+(74, 4, 42, NULL, NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -322,7 +320,7 @@ INSERT INTO `users_subtasks` (`id`, `id_users`, `id_subtasks`, `created_at`, `up
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `comments_id_tasks_foreign` (`id_tasks`);
+  ADD KEY `comments_id_tasks_foreign` (`id_subtasks`);
 
 --
 -- Индексы таблицы `failed_jobs`
@@ -336,14 +334,6 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `flags`
   ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `flags_tasks`
---
-ALTER TABLE `flags_tasks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `flags_tasks_id_flags_foreign` (`id_flags`),
-  ADD KEY `flags_tasks_id_tasks_foreign` (`id_tasks`);
 
 --
 -- Индексы таблицы `links`
@@ -398,7 +388,8 @@ ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tasks_id_spaces_foreign` (`id_spaces`),
   ADD KEY `tasks_id_statuses_foreign` (`id_statuses`),
-  ADD KEY `id_users` (`id_users`);
+  ADD KEY `id_users` (`id_users`),
+  ADD KEY `id_flags` (`id_flags`);
 
 --
 -- Индексы таблицы `users`
@@ -423,7 +414,7 @@ ALTER TABLE `users_subtasks`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `failed_jobs`
@@ -435,13 +426,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `flags`
 --
 ALTER TABLE `flags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `flags_tasks`
---
-ALTER TABLE `flags_tasks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `links`
@@ -477,13 +462,13 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT для таблицы `subtasks`
 --
 ALTER TABLE `subtasks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -495,7 +480,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users_subtasks`
 --
 ALTER TABLE `users_subtasks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -505,14 +490,7 @@ ALTER TABLE `users_subtasks`
 -- Ограничения внешнего ключа таблицы `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_id_tasks_foreign` FOREIGN KEY (`id_tasks`) REFERENCES `tasks` (`id`) ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `flags_tasks`
---
-ALTER TABLE `flags_tasks`
-  ADD CONSTRAINT `flags_tasks_id_flags_foreign` FOREIGN KEY (`id_flags`) REFERENCES `flags` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `flags_tasks_id_tasks_foreign` FOREIGN KEY (`id_tasks`) REFERENCES `tasks` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `comments_id_tasks_foreign` FOREIGN KEY (`id_subtasks`) REFERENCES `subtasks` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `subtasks`
@@ -526,6 +504,7 @@ ALTER TABLE `subtasks`
 --
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`id_flags`) REFERENCES `flags` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tasks_id_spaces_foreign` FOREIGN KEY (`id_spaces`) REFERENCES `spaces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tasks_id_statuses_foreign` FOREIGN KEY (`id_statuses`) REFERENCES `statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

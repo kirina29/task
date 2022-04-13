@@ -3,6 +3,7 @@ let modalSubtask = document.getElementById('modalSubtask');
 let modalSubtaskUpd = document.querySelector('.modalSubtask-upd');
 let modal = document.querySelector('.modal');
 let modalUpd = document.querySelector('.modal-upd');
+let modalCom = document.querySelector('.modalComment');
 let btn = document.querySelector('.addTask');
 let close = document.getElementsByClassName("close");
 let updateSub = document.querySelectorAll(".update_sub");
@@ -13,18 +14,23 @@ let formSubTask=document.getElementById('addSubTask');
 // let formUpSubTask=document.getElementById('upSubTask');
 let formUpTask=document.forms.upTask
 let formUpSubTask=document.forms.upSubTask
+let formComment=document.forms.addComment
+let listSubTask = document.querySelectorAll('.dash-subtask');
+let listSubTaskBoard = document.querySelectorAll('.task-board');
 
-
-btn.onclick = function() {
-    modal.style.display = "block";
+if(btn){
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
 }
 
 window.onclick = function(event) {
-    if (event.target == modalSubtask || event.target == modal || event.target == modalUpd || event.target == modalSubtaskUpd) {
+    if (event.target == modalSubtask || event.target == modal || event.target == modalUpd || event.target == modalSubtaskUpd|| event.target == modalCom) {
         modal.style.display = "none";
         modalSubtask.style.display = "none";
         modalSubtaskUpd.style.display = "none";
         modalUpd.style.display = "none";
+        modalCom.style.display = "none";
         let ul=document.querySelector('.executor_ul')
         ul.style.display='none'
         let p_err=document.querySelectorAll("p.error");
@@ -40,7 +46,48 @@ for (let list of listTask) {
         formSubTask.dataset.deadline=list.dataset.deadline
         modalSubtask.style.display = "block";
     }
+    list.onmouseover=function () {
+        list.children[0].style.opacity='1'
+        list.children[0].style.visibility='visible'
+    }
+    list.onmouseout=function () {
+        list.children[0].style.opacity = '0'
+        list.children[0].style.visibility = 'hidden'
+        list.children[0].style.transition = '0.2s ease-in-out';
+    }
 }
+
+for (let list of listSubTask) {
+    console.log(list)
+    list.onclick = function() {
+        event.stopPropagation()
+        formComment.action=`dashboard/addcomment/${list.id}`
+        modalCom.style.display = "block";
+    }
+    list.onmouseover=function () {
+        list.children[0].style.opacity='1'
+        list.children[0].style.visibility='visible'
+    }
+    list.onmouseout=function () {
+        list.children[0].style.opacity='0'
+        list.children[0].style.visibility='hidden'
+        list.children[0].style.transition= '0.2s ease-in-out';
+    }
+}
+
+for (let list of listSubTaskBoard) {
+    list.onmouseover=function () {
+        console.log('aa')
+        list.children[0].style.opacity='1'
+        list.children[0].style.visibility='visible'
+    }
+    list.onmouseout=function () {
+        list.children[0].style.opacity='0'
+        list.children[0].style.visibility='hidden'
+        list.children[0].style.transition= '0.2s ease-in-out';
+    }
+}
+
 for (let up of updateTask) {
     up.onclick = function() {
         event.stopPropagation()
@@ -50,11 +97,18 @@ for (let up of updateTask) {
         formUpTask.elements['deadline_dateUpdTask'].value=up.dataset.deadline
         formUpTask.elements['start_dateUpdTask'].value=up.dataset.start
         formUpTask.elements['priceUpdTask'].value=up.dataset.price
+        if(!up.dataset.flags){
+            formUpTask.elements['flags'].value=null
+        }
+        else{
+            formUpTask.elements['flags'].value=up.dataset.flags
+        }
         modalUpd.style.display = "block";
     }
 }
 for (let up of updateSub) {
     up.onclick = function() {
+        event.stopPropagation()
         let before=document.querySelector('.beforeExecut')
         formUpSubTask.action=`dashboard/upsubtask/${up.dataset.id}`
         formUpSubTask.dataset.start=up.dataset.start
@@ -204,7 +258,3 @@ function addExecut(event){
 function remove_execut(event){
     event.target.parentNode.parentNode.remove()
 }
-
-
-
-
