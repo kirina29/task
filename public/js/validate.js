@@ -225,3 +225,31 @@ function upSub(){
     }
     return true
 }
+
+function addCom(){
+    let form=document.forms.addComment
+    let validator ={}
+    let error=''
+    let p_err = document.querySelectorAll("p.error");
+    console.log(form)
+
+    if(form.elements['textcomment'].value=="")
+    {
+        error="Комментарий должен быть заполнен"
+        validator.textcomment=error
+    }
+
+    if(Object.keys(validator).length!=0)
+    {
+        for(let i=0; i<p_err.length; i++)
+        {
+            if(validator[p_err[i].id] ==undefined)
+            {
+                validator[p_err[i].id]=""
+            }
+            p_err[i].innerHTML=validator[p_err[i].id]
+        }
+        return false
+    }
+    return true
+}

@@ -207,9 +207,35 @@ h1{
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+.modalComment{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
 
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 .modal-content-subtask {
   position: relative;
+    background-color: #d8cce4;
+    margin: auto;
+    padding: 10px;
+    border: 5px solid #5e7ace;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+.modal-content-comment {
+    position: relative;
     background-color: #d8cce4;
     margin: auto;
     padding: 10px;
@@ -244,6 +270,9 @@ h1{
     height: 70px;
 
 
+}
+.dash-subtask:hover{
+    background: #f7f6ff;
 }
 @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0}
@@ -548,7 +577,7 @@ h1{
     overflow: auto;
 }
 .modal_task_content{
-    width: 20vw;
+    min-width: 180px;
     min-height: 10vh;
     border: 1px solid #696868;
     border-radius: 5px;
@@ -565,6 +594,10 @@ h1{
     background-color: #d5cdde;
     border-radius: 5px;
     margin-bottom: 5px;
+    position: relative;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
 }
 
 .executor_block{
@@ -597,4 +630,62 @@ h1{
     top: 0;
     right: -20px;
     font-size: 25px;
+}
+.modal-content select{
+    width: 100%;
+}
+.tags_li{
+    top: 33%;
+    position: absolute;
+    right: 0;
+    margin-right: 100px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.filtr a{
+    cursor: pointer;
+}
+
+.filtr a:hover{
+    text-shadow: gray 1px 1px 1px;
+
+}
+.filtr{
+    position: absolute;
+    top: 33%;
+    right: 0;
+    margin-right: 70px;
+}
+
+#mess{
+    position: absolute;
+    width: 97%;
+    text-align: center;
+}
+
+.tooltip_subtask{
+    position: absolute;
+    bottom: 40%;
+    left: 50%;
+    min-width: 20%;
+    min-height: 30px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    transition: 0.2s ease-in-out;
+    word-wrap: break-word;
+    color: black;
+
+}
+.tooltip_subtask p {
+    font-size: 13px;
+}
+.task-board{
+    position: relative;
 }

@@ -48,6 +48,8 @@ Route::any('/dashboard/addsubtask/{id}', [AddtasksController::class,'addsubtask'
 Route::any('/dashboard/uptask/{id}', [AddtasksController::class,'uptask']);
 Route::any('/dashboard/upsubtask/{id}', [AddtasksController::class,'upsubtask']);
 
+Route::any('/dashboard/addcomment/{id}', [AddtasksController::class,'addcomment']);
+
 Route::post('/dashboard/checktask/{id}', [AddtasksController::class,'checktask'])->name('checktask');
 Route::post('/dashboard/checksubtask/{id}', [AddtasksController::class,'checksubtask'])->name('checksubtask');
 Route::delete('/dashboard/task/{id}', [AddtasksController::class,'destroy'])->name('destroytask');
