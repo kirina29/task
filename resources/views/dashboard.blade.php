@@ -32,7 +32,7 @@
 @else
 <x-app-layout>
     <x-slot name="header">
-        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-nav-link :href="route('dashboard')" active class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Список') }}
         </x-nav-link>
         <x-nav-link :href="route('board')" :active="request()->routeIs('board')" class="font-semibold text-xl text-gray-800 leading-tight">
@@ -53,13 +53,15 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 border-b border-gray-200 bg" style="position: relative">
                 <a class="registr addTask">Добавить задачу</a>
-                <nav class="filtr">
-                    <a onclick="filtr('1')">Срочные</a> |
-                    <a onclick="filtr('2')">Важные</a> |
-                    <a onclick="filtr('3')">Несущественные</a> |
-                    <a onclick="filtr()">Все</a>
-                </nav>
-                <div id="mess"></div>
+                <div class="filtr-container">
+                    <nav class="filtr">
+                        <a onclick="filtr('1')">Срочные</a> |
+                        <a onclick="filtr('2')">Важные</a> |
+                        <a onclick="filtr('3')">Несущественные</a> |
+                        <a onclick="filtr()">Все</a>
+                    </nav>
+                    <div id="mess"></div>
+                </div>
             </div>
                 <div>
                     <ul id="myULTask">
@@ -149,7 +151,7 @@
                 </div>
                 <div id="myModal" class="modal">
                     <div class="modal-content">
-                    <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-indigo-400 font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Добавление задачи</h4>
+                    <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-black font-medium leading-5 text-gray-900 focus:outline-none focus:border-black transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Добавление задачи</h4>
                         <form action="dashboard/addtask" role="form" autocomplete="off" class="adminFormAddTask" id="addTask" name="addTask" onsubmit="return addTaskV();">
                                 @csrf
                                 <div class="form-group">
@@ -185,7 +187,7 @@
                 </div>
                 <div id="myModalUpd" class="modal-upd">
                     <div class="modal-content">
-                        <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-indigo-400 font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Изменение задачи</h4>
+                        <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-black font-medium leading-5 text-gray-900 focus:outline-none focus:border-black transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Изменение задачи</h4>
                         <form action="dashboard/uptask" role="form" autocomplete="off" class="adminFormAddTask" id="upTask" name="addTask" onsubmit="return upTaskV();">
                             @csrf
                             <div class="form-group">
@@ -231,7 +233,7 @@
                 </div>
                 <div id="modalSubtask" class="modalSubtask" onclick="closeExecut()">
                     <div class="modal-content-subtask">
-                    <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-indigo-400 font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Добавление подзадачи</h4>
+                    <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-black font-medium leading-5 text-gray-900 focus:outline-none focus:border-black transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Добавление подзадачи</h4>
                         <form action="dashboard/addsubtask" role="form" autocomplete="off" class="adminFormAddTask" id="addSubTask" name="addSubTask" onsubmit="return addSub();">
                             @csrf
                             <div class="form-group">
@@ -271,7 +273,7 @@
                 </div>
                 <div id="modalSubtaskUpd" class="modalSubtask-upd" onclick="closeExecut()">
                     <div class="modal-content-subtask">
-                        <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-indigo-400 font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Изменение подзадачи</h4>
+                        <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-black font-medium leading-5 text-gray-900 focus:outline-none focus:border-black transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Изменение подзадачи</h4>
                         <form action="dashboard/addsubtask" role="form" autocomplete="off" class="adminFormAddTask" id="upSubTask" name="addSubTask" onsubmit="return upSub();">
                             @csrf
                             <div class="form-group">
@@ -301,7 +303,7 @@
                 </div>
                 <div id="modalComment" class="modalComment" onclick="closeExecut()">
                     <div class="modal-content-comment">
-                        <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-indigo-400 font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Комментарий к подзадаче</h4>
+                        <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-black font-medium leading-5 text-gray-900 focus:outline-none focus:border-black transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Комментарий к подзадаче</h4>
                         <form action="dashboard/addcomment" role="form" autocomplete="off" class="adminFormAddTask" id="addComment" name="addComment" onsubmit="return addCom();">
                             @csrf
                             <div class="form-group">

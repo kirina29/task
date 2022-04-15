@@ -87,6 +87,14 @@ h1{
     float: left;
     line-height: 2.5;
 }
+.logoName-lk{
+  color:white;
+  font-size:30px;
+  font-weight:bold;
+  font-family: "Allenoire";
+  float: left;
+  line-height: 2.5;
+}
 .upperWord{
     color:#744d9f;
 }
@@ -313,8 +321,15 @@ img:nth-child(4){animation-delay:0}
 
 
 .bg{
-    background: rgba(212, 212, 231, 0.685);
     overflow-y: auto;
+    background: url("../images/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    background-position: center center;
+    box-shadow: inset 0 0 0 1000px rgba(3, 0, 7, 0.685);
+    display: flex;
+    justify-content: space-between;
 }
 
 .modal{
@@ -403,14 +418,18 @@ img:nth-child(4){animation-delay:0}
     background-color: #d8cce4;
     margin: auto;
     padding: 10px;
-    border: 5px solid #5e7ace;
-    width: 50%;
+    border: 5px solid #33343a;
+    width: 40%;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
+    
+}
+#mess{
+  color:white;
 }
 .modal-content-comment {
     position: relative;
@@ -418,7 +437,7 @@ img:nth-child(4){animation-delay:0}
     margin: auto;
     padding: 10px;
     border: 5px solid #5e7ace;
-    width: 50%;
+    width: 40%;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -818,20 +837,18 @@ img:nth-child(4){animation-delay:0}
 }
 
 .filtr a:hover{
-    text-shadow: gray 1px 1px 1px;
-
+    text-shadow: rgb(122, 85, 192);
+  color:rgb(122, 85, 192);
 }
 .filtr{
-    position: absolute;
-    top: 33%;
-    right: 0;
-    margin-right: 70px;
+    position: relative;
+    color: white;
+    padding-top: 5px;
+    right:0;
 }
-
-#mess{
-    position: absolute;
-    width: 97%;
-    text-align: center;
+.addTask{
+  height: 40px;
+  max-height: 65px;
 }
 
 .tooltip_subtask{
@@ -860,4 +877,9 @@ img:nth-child(4){animation-delay:0}
 }
 .task-board{
     position: relative;
+}
+@media (max-width: 570px) {
+  .addTask{
+    height: 60px;
+  }
 }
