@@ -29,6 +29,31 @@
                     <ul id="myULTask">
                         @foreach($resultsubtask as $rs)
                             <li class="litask">
+                                <div class="tooltip_subtask">
+                                    <p>Назначил:
+                                        @foreach($users as $u)
+                                            @if($u->id==$rs->user)
+                                                <span>{{$u->name}}</span>
+                                            @endif
+                                        @endforeach
+                                    </p>
+                                    <p>Исполняют:
+                                        @foreach($execut as $ex)
+                                            @if($ex->id_subtasks==$rs->id)
+                                                <span>{{$user[$ex->id_users][0]->name}}</span>
+                                            @endif
+                                        @endforeach
+                                    </p>
+                                    <p>Дата начала: {{$rs->start_date}}</p>
+                                    <p>Дата дедлайна: {{$rs->deadline_date}}</p>
+                                    <p>Комментарии:
+                                        @foreach($comment as $c)
+                                            @if($c->id_subtasks==$rs->id)
+                                                <span>{{$c->textcomment}}</span><br>
+                                            @endif
+                                        @endforeach
+                                    </p>
+                                </div>
                                 <form method="POST" action="{{route('checksubtask', $rs)}}" id="formTask">
                                     @csrf
                                     <button type="submit" class="checkTask" name="checkTask" onclick="event.stopPropagation()">&#x2713;</button>

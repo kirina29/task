@@ -51,5 +51,6 @@
   crossorigin="anonymous"></script>
         <script src="{{ asset('js/js.js') }}" defer></script>
         <script src="{{ asset('js/validate.js') }}" defer></script>
+        <script src="{{ asset('js/filtr.js') }}" defer></script>
     </body>
 </html>

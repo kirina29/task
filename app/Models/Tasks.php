@@ -24,5 +24,9 @@ class Tasks extends Model
     {
         return $this->hasMany(Subtasks::class, 'id_tasks');
     }
+    public function flag()
+    {
+        return $this->belongsTo(Flags::class, 'id_flags');
+    }
 
 }

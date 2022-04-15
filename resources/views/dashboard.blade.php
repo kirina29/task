@@ -51,22 +51,43 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 border-b border-gray-200 bg">
+            <div class="p-6 border-b border-gray-200 bg" style="position: relative">
                 <a class="registr addTask">Добавить задачу</a>
+                <nav class="filtr">
+                    <a onclick="filtr('1')">Срочные</a> |
+                    <a onclick="filtr('2')">Важные</a> |
+                    <a onclick="filtr('3')">Несущественные</a> |
+                    <a onclick="filtr()">Все</a>
+                </nav>
+                <div id="mess"></div>
             </div>
                 <div>
                     <ul id="myULTask">
+                        @if(count($res)==0)
+                            <h2>Задачи отсутствуют</h2>
+                        @else
                             @foreach($res as $r)
-                                <li class="litask" id="{{$r->id}}" data-start="{{$r->start_date}}" data-deadline="{{$r->deadline_date}}">
+                                <li class="litask" data-flag-id="{{$r->id_flags}}" id="{{$r->id}}" data-start="{{$r->start_date}}" data-deadline="{{$r->deadline_date}}">
+                                    <div class="tooltip_subtask">
+                                        <p>Описание: {{$r->descriptions}}</p>
+                                        <p>Дата начала: {{$r->start_date}}</p>
+                                        <p>Дата дедлайна: {{$r->deadline_date}}</p>
+                                    </div>
                                     <form method="POST" action="{{route('checktask', $r)}}" id="formTask">
                                     @csrf
                                         <button type="submit" class="checkTask" name="checkTask" onclick="event.stopPropagation()">&#x2713;</button>
                                     </form>
                                     {{$r->name}}<br>
                                     <small>{{$r->status}}</small>
-                                    <button type="button" class="update update_task" onclick="event.stopPropagation()" data-id="{{$r->id}}" data-start="{{$r->start_date}}" data-deadline="{{$r->deadline_date}}" data-name="{{$r->name}}" data-description="{{$r->descriptions}}" data-price="{{$r->price}}">
+                                    <button type="button" class="update update_task" onclick="event.stopPropagation()" data-id="{{$r->id}}" data-start="{{$r->start_date}}" data-deadline="{{$r->deadline_date}}" data-name="{{$r->name}}" data-description="{{$r->descriptions}}" data-price="{{$r->price}}" data-flags="{{$r->id_flags}}">
                                         &#9998;
                                     </button>
+                                    @foreach($tags as $t)
+                                        @if($t->id===$r->id_flags)
+                                            <span style="background-color: {{$t->color}}" class="tags_li" data-id="{{$r->id_flags}}">{{$t->name}}</span>
+                                        @endif
+                                    @endforeach
+
                                     <form method="POST" action="{{route('destroytask', $r)}}" onclick="event.stopPropagation()">
                                         @csrf
                                         @method('DELETE')
@@ -77,8 +98,27 @@
                                 </li>
                                 @foreach($resultsubtask as $rs)
                                     @if($rs->id_tasks==$r->id)
-                                        <li class="dash-subtask">
-                                            <form method="POST" action="{{route('checksubtask', $rs)}}" id="formTask">
+                                        <li class="dash-subtask" data-flag-id="{{$r->id_flags}}" id="{{$rs->id}}">
+                                            <div class="tooltip_subtask">
+                                                <p>Исполнитель:
+                                                    @foreach($execut as $ex)
+                                                        @if($ex->id_subtasks==$rs->id)
+                                                            <span>{{$users[$ex->id_users][0]->name}}</span>
+                                                        @endif
+                                                    @endforeach
+                                                </p>
+                                                <p>Дата начала: {{$rs->start_date}}</p>
+                                                <p>Дата дедлайна: {{$rs->deadline_date}}</p>
+                                                <p>Комментарии:
+                                                    @foreach($comment as $c)
+                                                        @if($c->id_subtasks==$rs->id)
+                                                            <span>{{$c->textcomment}}</span><br>
+                                                        @endif
+                                                    @endforeach
+                                                </p>
+
+                                            </div>
+                                            <form method="POST" action="{{route('checksubtask', $rs)}}" id="formTask" data-flag-id="{{$r->id_flags}}">
                                                 @csrf
                                                 <button type="submit" class="checkTask" name="checkTask" onclick="event.stopPropagation()">&#x2713;</button>
                                             </form>
@@ -104,6 +144,7 @@
                                     @endif
                                 @endforeach
                             @endforeach
+                        @endif
                     </ul>
                 </div>
                 <div id="myModal" class="modal">
@@ -172,9 +213,19 @@
                                 <input type="date" class="form-control block mt-1 w-full" value="{{old('deadline_date')}}" name="deadline_dateUpdTask" id="formTaskUpd-deadline_date" placeholder="Дата сдачи задачи">
                             </div>
                             <p class="error" id="deadline_date"></p>
-                            <div class="flex items-center justify-end mt-4">
-                                <x-button class="btn btn-success ml-3" type="submit">Изменить задачу</x-button>
+                            <div class="form-group">
+                                <label for="form-flags">Теги</label>
+                                <select name="flags">
+                                    <option disabled value="null" selected>Выберите тег</option>
+                                    @foreach($tags as $t)
+                                        <option value="{{$t->id}}">{{$t->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                            <div class="flex items-center justify-end mt-4">
+                                 <x-button class="btn btn-success ml-3" type="submit">Изменить задачу</x-button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -244,6 +295,23 @@
                             <p class="error" id="executName"></p>
                             <div class="flex items-center justify-end mt-4">
                                 <x-button class="btn btn-success ml-3" type="submit">Изменить подзадачу</x-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="modalComment" class="modalComment" onclick="closeExecut()">
+                    <div class="modal-content-comment">
+                        <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-indigo-400 font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Комментарий к подзадаче</h4>
+                        <form action="dashboard/addcomment" role="form" autocomplete="off" class="adminFormAddTask" id="addComment" name="addComment" onsubmit="return addCom();">
+                            @csrf
+                            <div class="form-group">
+                                <label for="form-name">Комментарий</label>
+{{--                                <input type="text" class="form-control block mt-1 w-full" value="{{old('name')}}" name="nameUpdSub" id="form-name" placeholder="Название подзадачи">--}}
+                                <textarea name="textcomment" rows="3" class="form-control block mt-1 w-full"></textarea>
+                            </div>
+                            <p class="error" id="textcomment"></p>
+                            <div class="flex items-center justify-end mt-4">
+                                <x-button class="btn btn-success ml-3" type="submit">Отправить комментарий</x-button>
                             </div>
                         </form>
                     </div>

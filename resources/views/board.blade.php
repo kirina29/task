@@ -27,7 +27,14 @@
                         <ul class="list-group c1" data-name="new" data-status-id="1" ondrop="onDrop(event);" ondragover="onDragOver(event);">
                             @foreach($result as $r)
                                 @if($r->status==='Новая')
-                                    <li class="task-board" id="{{$r->id}}" draggable="true" ondragstart="onDragStart(event);" ondrop="event.stopPropagation()">{{$r->name}}</li>
+                                    <li class="task-board" id="{{$r->id}}" draggable="true" ondragstart="onDragStart(event);" ondrop="event.stopPropagation()">
+                                        <div class="tooltip_subtask" style="min-width: 60%;left: 30%">
+                                            <p>Описание: {{$r->descriptions}}</p>
+                                            <p>Дата начала: {{$r->start_date}}</p>
+                                            <p>Дата дедлайна: {{$r->deadline_date}}</p>
+                                        </div>
+                                        {{$r->name}}
+                                    </li>
                                 @endif
                             @endforeach
                         </ul>
@@ -38,7 +45,14 @@
                         <ul class="list-group c2" data-name="in-work" data-status-id="2" ondrop="onDrop(event);" ondragover="onDragOver(event);">
                             @foreach($result as $r)
                                 @if($r->status==='В работе')
-                                    <li class="task-board" id="{{$r->id}}" draggable="true" ondragstart="onDragStart(event);"  ondrop="event.stopPropagation()">{{$r->name}}</li>
+                                    <li class="task-board" id="{{$r->id}}" draggable="true" ondragstart="onDragStart(event);"  ondrop="event.stopPropagation()">
+                                        <div class="tooltip_subtask" style="min-width: 60%;left: 30%">
+                                            <p>Описание: {{$r->descriptions}}</p>
+                                            <p>Дата начала: {{$r->start_date}}</p>
+                                            <p>Дата дедлайна: {{$r->deadline_date}}</p>
+                                        </div>
+                                        {{$r->name}}
+                                    </li>
                                 @endif
                             @endforeach
 
@@ -50,7 +64,14 @@
                         <ul class="list-group c3" data-name="completed" data-status-id="3" ondrop="onDrop(event);" ondragover="onDragOver(event);">
                             @foreach($result as $r)
                                 @if($r->status==='Готова')
-                                    <li class="task-board" id="{{$r->id}}" draggable="true" ondragstart="onDragStart(event);" ondrop="event.stopPropagation()">{{$r->name}}</li>
+                                    <li class="task-board" id="{{$r->id}}" draggable="true" ondragstart="onDragStart(event);" ondrop="event.stopPropagation()">
+                                        <div class="tooltip_subtask" style="min-width: 60%; left: 30%">
+                                            <p>Описание: {{$r->descriptions}}</p>
+                                            <p>Дата начала: {{$r->start_date}}</p>
+                                            <p>Дата дедлайна: {{$r->deadline_date}}</p>
+                                        </div>
+                                        {{$r->name}}
+                                    </li>
                                 @endif
                             @endforeach
                         </ul>

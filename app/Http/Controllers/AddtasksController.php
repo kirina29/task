@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
+use App\Models\Flags;
 use App\Models\Users_subtasks;
 use Illuminate\Http\Request;
 use App\Models\Tasks;
@@ -11,21 +13,38 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Comment;
+
 class AddtasksController extends Controller
 {
     public function read(){
         $us=User::all();
         $group=$us->groupBy('id');
+        $tag=Flags::all();
+        $comment=Comments::all();
 
         $l=Tasks::join('statuses', 'statuses.id', '=', 'tasks.id_statuses')
             ->select('tasks.*', 'statuses.name as status')
             ->where('id_users', Auth::id())
             ->get();
+
+
         $s=Subtasks::join('statuses', 'statuses.id', '=', 'subtasks.id_statuses')
             ->select('subtasks.*', 'statuses.name as status')
             ->get();
         $execut=Users_subtasks::all();
-        return view('dashboard', ['resultsubtask'=>$s,'users'=>$group, 'res'=>$l, 'execut'=>$execut]);
+        for ($i=0;$i<count($tag);$i++){
+            if($tag[$i]->name==='Важно'){
+                $tag[$i]['color']='#FFFF00';
+            }
+            else if($tag[$i]->name==='Срочно'){
+                $tag[$i]['color']='#FF0000';
+            }
+            else if($tag[$i]->name==='Несущественно'){
+                $tag[$i]['color']='#008000';
+            }
+        }
+        return view('dashboard', ['resultsubtask'=>$s,'users'=>$group, 'res'=>$l, 'execut'=>$execut, 'tags'=>$tag, 'comment'=>$comment]);
     }
 
     public function board(){
@@ -138,10 +157,22 @@ class AddtasksController extends Controller
             'descriptions'=>$descriptions,
             'price'=>$price,
             'deadline_date'=>$deadline,
-            'start_date'=>$start
+            'start_date'=>$start,
+            'id_flags'=>$request->flags
         ]);
         return redirect()->route('dashboard');
     }
+
+    public function addcomment(Request $request, $id)
+    {
+        $comment=Comments::create([
+            'textcomment'=>$request->textcomment,
+            'id_subtasks'=>$id
+        ]);
+
+        return redirect()->route('dashboard');
+    }
+
     public function updateStatus(Request $request, $id)
     {
         $task=Tasks::find($id);
@@ -162,9 +193,14 @@ class AddtasksController extends Controller
     {
         $s=Subtasks::join('statuses', 'statuses.id', '=', 'subtasks.id_statuses')
             ->join('users_subtasks', 'subtasks.id', '=', 'users_subtasks.id_subtasks')
-            ->select('subtasks.*', 'statuses.name as status')
+            ->join('tasks', 'tasks.id', '=', 'subtasks.id_tasks')
+            ->select('subtasks.*', 'statuses.name as status', 'tasks.id_users as user')
             ->where('users_subtasks.id_users', Auth::id())
             ->get();
-        return view('subtask', ['resultsubtask'=>$s]);
+        $users=User::all();
+        $execut=Users_subtasks::all();
+        $comment=Comments::all();
+        $group=$users->groupBy('id');
+        return view('subtask', ['resultsubtask'=>$s, 'user'=>$group, 'users'=>$users, 'execut'=>$execut, 'comment'=>$comment]);
     }
 }
