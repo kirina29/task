@@ -20,21 +20,14 @@
         <div class="body-container">
             @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Личный кабинет</a>
                     @else
                         <header class="body-container-header">  
                             
-                                <div class="heder-left">
+                                <div class="header-left">
                                     <img class="logo" src="{{URL::asset('/images/logo.png')}}" /><span class="logoName"><span class="upperWord">T</span>ask<span class="upperWord">M</span>anager</span>
                                 </div>
-                                <div class="header-center">
-                                    <nav>
-                                    <ul class="navigation">
-                                        <li class="current"><a href="{{route('welcome')}}">Главная</a></li>
-                                        <li><a href="">О нас</a></li>
-                                    </ul>
-                                    </nav>
-                                </div>
+                                
                                 <div class="header-right button button-registr">
                                     <a href="{{ route('login') }}" class="registr text-sm">Вход</a>
                                     @if (Route::has('register'))
@@ -49,9 +42,74 @@
                     <section class="sectionTitle">
                     <h1 class="sectionTitle-title">Умный способ<br>организовать задачи</h1>
                     </section>
+                    <section class="section1">
+                            <div class="section1-div">
+                                <div class=section1-content>
+                                    <div class="section1-title">
+                                        <h2 class="logoName"><span class="upperWord">T</span>ask<span class="upperWord">M</span>anager</h2>
+                                    </div>
+                                    <div class="section1-descr">
+                                        Таск-трекер для команды, для бизнеса, для управления собственными делами
+                                    </div>
+                                    <a class="section1-btn" href="#">Попробовать бесплатно &#9658;</a>
+                                </div>
+                                <div class=section1-images>
+                                    <img src="{{URL::asset('/images/logo.png')}}" width="50">
+                                </div>
+                            </div>
+                    </section>
+                    <section class="section2">
+                            <div class="section2-div">
+                                <div class=section2-content>
+                                    <div class="section2-title">
+                                        <h2 class="logoName">Всего одна сущность - задача</h2>
+                                    </div>
+                                    <div class="section2-descr">
+                                        Её видно в трёх представлениях: в списке, на доске и в календаре.
+                                    </div>
+                                </div>
+                                    <div class="container_slider_css">
+                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/1.jpg" alt="">
+                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/2.jpg" alt="">
+                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/3.jpg" alt="">
+                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/4.jpg" alt="">
+                                    </div>
+                            </div>
+                    </section>
+                    <section class="section3">
+                            <div class="section3-div">
+                                <div class=section3-block>
+                                    <img class="section3-img" src="{{URL::asset('/images/logo.png')}}" width="50">
+                                    <div class="feature-title">sfdef</div>
+                                    <div class="feature-text">sfdddddddddddd ddddddddddddddd ddddddd ff ffffff fef</div>
+                                </div>
+                                <div class=section3-block>
+                                    <img class="section3-img" src="{{URL::asset('/images/logo.png')}}" width="50">
+                                    <div class="feature-title">sfdef</div>
+                                    <div class="feature-text">sfdddddddddddd ddddddddddddddd ddddddd ff ffffff fef</div>
+                                </div>
+                                <div class=section3-block>
+                                    <img class="section3-img" src="{{URL::asset('/images/logo.png')}}" width="50">
+                                    <div class="feature-title">sfdef</div>
+                                    <div class="feature-text">sfdddddddddddd ddddddddddddddd ddddddd ff ffffff fef</div>
+                                </div>
+                            </div>
+                    </section>
                 </main> 
-                <footer class="body-container-footer"></footer>
-            <!-- @endif -->
-            </div>
+                <footer class="body-container-footer">
+                    <div class="footer">
+                        <div class="footer-left">
+                            <span class="logoName"><span class="upperWord">T</span>ask<span class="upperWord">M</span>anager - простые инструменты для сложных задач</span>
+                            <div><a href="tel: 89962373748">8 996 237 37 48</a></div>
+                            <div><a href="mailto: taskmanager@mail.ru">taskmanager@mail.ru</a></div>
+                        </div>       
+                        <div class="footer-right">
+                        <a class="footer-btn" href="#">Начать работу &#9658;</a>
+                        <div>© 2022 TaskManager. Все права защищены.</div>
+                        </div>   
+                    </div>
+                </footer>
+            @endif
+        </div>
     </body>
 </html>

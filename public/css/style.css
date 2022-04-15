@@ -10,50 +10,71 @@ h1{
     margin:0;
     padding:0;
 }
-.body-container{
-    display: grid;
-    height:100%;
-}
+
 .body-container-header{
     color:#eee;
-    text-align: center;
-    padding: 10px 20px;
-  background-color: rgb(28, 34, 99);
-  height:10vh;
-  display: grid;
+    text-align: right;
+    padding: 10px 10%;
+    background-color: rgb(6, 0, 10);
+    height:10%;
+    width: 100%;
+    display: grid;
     grid-template-areas:
-    "navLeft navCenter navRight";
+    "navLeft navRight";
 }
 .body-container-main{
     color:#eee;
-    height:80vh;
-
-    background: rgb(185, 186, 190);
+    height:100%;
 }
 .body-container-footer{
 
-    color:#eee;
-    background: rgb(28, 34, 99);
-    text-align: center;
-    padding: 10px 20px;
-
-  position:relative;
+  color:#eee;
+  background: rgb(6, 0, 10);
+  text-align: center;
+  padding: 20px 20px;
+  position: relative;
   bottom:0;
-  height:10vh;
+  height:10%;
 
 }
+.footer{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+  flex-wrap: wrap;
+}
+.footer a:hover{
+  color: rgb(122, 85, 192);
+  transition: .4s;
+}
+.footer-btn{
+  display: flex;
+  margin-top: 5%;
+    background-color: rgb(122, 85, 192);
+    color: white;
+    width: 50%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    transition: .4s;
+    min-width: 70px;
+}
+.footer-btn:hover{
+  color: rgb(122, 85, 192);
+  background-color: rgb(255, 255, 255);
 
+}
 .header-left{
     grid-area: navLeft;
     align-self: center;
 }
-.header-center{
-    grid-area: navCenter;
-    align-self: center;
-}
+
 .header-right{
     grid-area: navRight;
     align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
 }
 .logo {
     width: 40px;
@@ -79,8 +100,12 @@ h1{
     overflow: hidden;
 }
 .navigation li {
-    display: inline;
+    display: inline-block;
+    
+      vertical-align: top;
+  
 }
+
 .navigation a {
     color:#fff;
     padding: 0.75em;
@@ -92,10 +117,19 @@ h1{
 
     color: rgb(122, 85, 192)
 }
+@media screen and (max-width: 600px) {
+  .header-right{
+    justify-content: center;
+}
+  .registr{
+    margin-top: 5px;
+  }
+  
+}
 .registr, .admin-btn{
     color:white;
-    padding: 10px 30px;
-    border-radius: 25px;
+    padding: 7px 20px;
+    border-radius: 10px;
     border:0px solid;
     cursor: pointer;
     font-weight: bold;
@@ -103,6 +137,7 @@ h1{
 }
 .registr{
   background-color: rgb(122, 85, 192);
+  margin-left: 1rem;
 }
 .registr:hover{
     background-color: white;
@@ -122,9 +157,11 @@ h1{
     background-repeat: no-repeat;
     background-size: cover;
     width:100%;
-    height:100%;
+    height:650px;
     background-position: center center;
-    box-shadow: inset 0 0 0 1000px rgba(28, 34, 99, 0.685);
+    box-shadow: inset 0 0 0 1000px rgba(3, 0, 7, 0.685);
+    padding-bottom: 2em;
+  padding-top: 4.125em;
 }
 .sectionTitle-title{
     color:white;
@@ -133,7 +170,148 @@ h1{
     top: 20%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 50px;
+    
 }
+.section1{
+  
+  width:100%;
+  height:70%;
+  position: relative;
+}
+.section1-div{
+  padding-top: 4.125em;
+  padding-bottom: 2em;
+  color:black;
+  display:flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.section1-content{
+  display: grid;
+  
+}
+.section1-title h2{
+  font-size: 50px;
+  margin: 0;
+}
+.section1-descr{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  max-width: 40%;
+}
+.section1-btn{
+  display: flex;
+  margin-top: 5%;
+    background-color: black;
+    color: white;
+    width: 30%;
+    padding: 1% 1%;
+    border-radius: 10px;
+    transition: .4s;
+    min-width: 120px;
+}
+.section1-btn:hover{
+    background-color: rgb(122, 85, 192);
+    color: black;
+    cursor: pointer;
+}
+.section2{
+  background: url("/public/images/ss.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    background-position: center center;
+    box-shadow: inset 0 0 0 1000px rgba(3, 0, 7, 0.788);
+    padding-bottom: 2em;
+  padding-top: 4.125em;
+}
+.section2-div{
+  color:white;
+  
+}
+.section2-content{
+  display: grid;
+  padding-left: 10%;
+}
+.section2-title h2{
+  font-size: 50px;
+  margin: 0;
+  line-height: 1.4;
+}
+.section2-descr{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  max-width: 40%;
+}
+.container_slider_css{
+  margin:50px auto;
+  width:500px;
+  height:300px;
+  overflow:hidden;
+  position:relative;
+}
+.photo_slider_css{position:absolute;animation:round 16s infinite;opacity:0;width:100%}
+@keyframes round {
+25%{opacity:1}
+40%{opacity:0}
+}
+img:nth-child(1){animation-delay:12s}
+img:nth-child(2){animation-delay:8s}
+img:nth-child(3){animation-delay:4s}
+img:nth-child(4){animation-delay:0}
+@media(min-width:0px) and (max-width:320px) {
+.container_slider_css{width:80%;height:190px}
+}
+@media(min-width:321px) and (max-width:480px) {
+.container_slider_css{width:80%;height:190px}
+}
+.section3{
+  width:100%;
+  height:70%;
+  padding-bottom: 2em;
+  padding-top: 4.125em;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.section3-div{
+  display: flex;
+  justify-content: space-between;
+  color:black;
+  flex-wrap: wrap;
+
+}
+.section3-block{
+  text-align: center;
+  width: 22.75em;
+}
+.section3-img{
+  margin-bottom: 2.75em;
+  width: 11.625em;
+}
+.feature-title{
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+.feature-text{
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+
+
+
+
+
+
+
+
+
 .bg{
     background: rgba(212, 212, 231, 0.685);
     overflow-y: auto;
@@ -409,15 +587,6 @@ h1{
   .column3 li{
     background-color: rgb(30, 41, 65);
   }
-
-.container_slider_css{
-    margin:50px auto;
-    width:500px;
-    height:300px;
-    overflow:hidden;
-    position:relative;
-    top:100px;
-}
 #formTask{
   display: inline;
 
@@ -671,6 +840,8 @@ h1{
     left: 50%;
     min-width: 20%;
     min-height: 30px;
+    max-width: 50%;
+    max-height: 280%;
     background-color: white;
     border: 1px solid grey;
     border-radius: 5px;
@@ -681,6 +852,7 @@ h1{
     transition: 0.2s ease-in-out;
     word-wrap: break-word;
     color: black;
+    overflow-y: scroll;
 
 }
 .tooltip_subtask p {
