@@ -11,11 +11,11 @@ function filtr(status)
     {
         for(let i=0; i<litask.length; i++)
         {
-            litask[i].style.display='block'
+            litask[i].style.display='flex'
         }
         for(let i=0; i<lisub.length; i++)
         {
-            lisub[i].style.display='block'
+            lisub[i].style.display='flex'
         }
         document.querySelector('#mess').innerHTML=""
 
@@ -27,7 +27,7 @@ function filtr(status)
         console.log(status)
         if(litask[i].dataset.flagId===status)
         {
-            litask[i].style.display="block"
+            litask[i].style.display="flex"
             continue
         }
         litask[i].style.display="none"
@@ -36,7 +36,7 @@ function filtr(status)
     {
         if(lisub[i].dataset.flagId===status)
         {
-            lisub[i].style.display="block"
+            lisub[i].style.display="flex"
             continue
         }
         lisub[i].style.display="none"

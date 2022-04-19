@@ -54,7 +54,7 @@
                                     <a class="section1-btn" href="#">Попробовать бесплатно &#9658;</a>
                                 </div>
                                 <div class=section1-images>
-                                    <img src="{{URL::asset('/images/logo.png')}}" width="50">
+                                    <img src="{{URL::asset('/images/gant.png')}}" width="500">
                                 </div>
                             </div>
                     </section>

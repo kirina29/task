@@ -23,7 +23,7 @@
             <div class="p-6 border-b border-gray-200 bg">
                 <div class="container-board">
                     <div class="block-board column1">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Новые</h2>
+                        <h2 class="font-semibold text-xl text-black leading-tight">Новые</h2>
                         <ul class="list-group c1" data-name="new" data-status-id="1" ondrop="onDrop(event);" ondragover="onDragOver(event);">
                             @foreach($result as $r)
                                 @if($r->status==='Новая')
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="block-board column2">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight">В работе</h2>
+                        <h2 class="font-semibold text-xl text-black leading-tight">В работе</h2>
                         <ul class="list-group c2" data-name="in-work" data-status-id="2" ondrop="onDrop(event);" ondragover="onDragOver(event);">
                             @foreach($result as $r)
                                 @if($r->status==='В работе')
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="block-board column3">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Готовы</h2>
+                        <h2 class="font-semibold text-xl text-black leading-tight">Готовы</h2>
                         <ul class="list-group c3" data-name="completed" data-status-id="3" ondrop="onDrop(event);" ondragover="onDragOver(event);">
                             @foreach($result as $r)
                                 @if($r->status==='Готова')

@@ -40,12 +40,18 @@
                                 <td>Пт</td>
                                 <td>Сб</td>
                                 <td>Вс</td>
+                                <div class="modal_task_calendar">
+                            <div class="modal_task_content">
+
+                            </div>
+                        </div>
                             </tr>
+                            
                             <tbody>
                         </table>
                         <div id="myModal" class="modal modalCalendar">
                             <div class="modal-content">
-                                <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-indigo-400 font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Добавление задачи</h4>
+                                <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-black font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Добавление задачи</h4>
                                 <form action="dashboard/addtask" role="form" autocomplete="off" class="adminFormAddTask" id="addTask" name="addTask" onsubmit="return addTaskV();">
                                     @csrf
                                     <div class="form-group">
@@ -73,17 +79,13 @@
                                         <input type="date" class="form-control block mt-1 w-full" value="{{old('deadline_date')}}" name="deadline_date" id="form-deadline_date" placeholder="Дата сдачи задачи">
                                     </div>
                                     <p class="error" id="deadline_date"></p>
-                                    <div class="flex items-center justify-end mt-4">
+                                    <div class="flex items-center justify-center mt-4">
                                         <x-button class="btn btn-success ml-3" type="submit">Добавить задачу</x-button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="modal_task_calendar">
-                            <div class="modal_task_content">
-
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

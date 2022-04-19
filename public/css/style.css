@@ -195,27 +195,30 @@ h1{
   flex-wrap: wrap;
   padding-left: 10%;
   padding-right: 10%;
+  align-items: center;
 }
 .section1-content{
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  width:40%;
   
 }
 .section1-title h2{
   font-size: 50px;
   margin: 0;
+  line-height: 1.5;
 }
 .section1-descr{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
-  max-width: 40%;
 }
 .section1-btn{
   display: flex;
   margin-top: 5%;
     background-color: black;
     color: white;
-    width: 30%;
-    padding: 1% 1%;
+    width: 70%;
+    padding: 2% 2%;
     border-radius: 10px;
     transition: .4s;
     min-width: 120px;
@@ -224,6 +227,12 @@ h1{
     background-color: rgb(122, 85, 192);
     color: black;
     cursor: pointer;
+}
+.section1-images{
+  width:50%;
+}
+.section1-images img{
+  width:100%;
 }
 .section2{
   background: url("/public/images/ss.jpg");
@@ -311,15 +320,6 @@ img:nth-child(4){animation-delay:0}
   line-height: 1.5;
 }
 
-
-
-
-
-
-
-
-
-
 .bg{
     overflow-y: auto;
     background: url("../images/bg.jpg");
@@ -331,8 +331,10 @@ img:nth-child(4){animation-delay:0}
     display: flex;
     justify-content: space-between;
 }
-
-.modal{
+.subtasks-bg{
+  justify-content: center;
+}
+.modal,.modal-upd,.modalSubtask,.modalSubtask-upd,.modalComment{
     display: none;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -345,75 +347,7 @@ img:nth-child(4){animation-delay:0}
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-.modal-upd{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4);
-
-}
-
-
-.modal-content {
-    position: relative;
-    background-color: #d8cce4;
-    margin: auto;
-    padding: 10px;
-    border: 5px solid #5e7ace;
-    width: 50%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-
-}
-.modalSubtask{
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-.modalSubtask-upd{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-.modalComment{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-.modal-content-subtask {
+.modal-content-subtask,.modal-content,.modal-content-comment {
   position: relative;
     background-color: #d8cce4;
     margin: auto;
@@ -428,29 +362,23 @@ img:nth-child(4){animation-delay:0}
     animation-duration: 0.4s;
     
 }
+@media (max-width:650px){
+  .modal-content-subtask,.modal-content,.modal-content-comment {
+      width: 100%;
+}
+}
+@media (max-width:800px) and (min-width:651px){
+  .modal-content-subtask,.modal-content,.modal-content-comment {
+      width: 70%;
+}
+}
 #mess{
   color:white;
-}
-.modal-content-comment {
-    position: relative;
-    background-color: #d8cce4;
-    margin: auto;
-    padding: 10px;
-    border: 5px solid #5e7ace;
-    width: 40%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
 }
 .dash-subtask{
   cursor: pointer;
     position: relative;
-    display: block;
-    padding: 12px 8px 12px 20px;
-    background: #eee;
+    background: rgb(214, 214, 214);
     font-size: 18px;
     transition: 0.2s;
     -webkit-user-select: none;
@@ -461,15 +389,19 @@ img:nth-child(4){animation-delay:0}
     right: 0;
     width: 80%;
     margin: 0 auto;
-    border: 1px solid rgb(101, 111, 138);
     border-radius: 10px;
+    padding-left:30px;
+    border:1px solid rgb(19, 5, 54);
+    border-radius: 10px;
+    display: flex;
     border-top: 0px;
-    height: 70px;
+    justify-content: space-between;
+    flex-wrap:wrap;
 
 
 }
 .dash-subtask:hover{
-    background: #f7f6ff;
+    background: #bbbbbb;
 }
 @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0}
@@ -483,13 +415,19 @@ img:nth-child(4){animation-delay:0}
 #myULTask {
     margin: 0;
     padding: 0;
+    background: url(../images/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    background-position: center center;
+    box-shadow: inset 0 0 0 1000px rgb(3 0 7 / 69%);
   }
 
   /* Стиль элементов списка */
   #myULTask .litask {
     cursor: pointer;
     position: relative;
-    padding: 12px 8px 12px 30px;
+    padding-left:30px;
     background: #eee;
     font-size: 18px;
     transition: 0.2s;
@@ -501,12 +439,9 @@ img:nth-child(4){animation-delay:0}
     user-select: none;
     border:1px solid rgb(19, 5, 54);
     border-radius: 10px;
-      height: 70px;
-  }
-
-  /* Установить все нечетные элементы списка в другой цвет (зебра) */
-  #myULTask .litask:nth-child(odd) {
-    background: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
   }
 
   /* Более темный фон-цвет при наведении */
@@ -534,39 +469,58 @@ img:nth-child(4){animation-delay:0}
     height: 15px;
     width: 7px;
   }
-
+  #myULTask h2{
+    color:white;
+    padding:10px;
+  }
+.task-flex-start{
+  display: grid;
+  grid-template-areas: "ok name"
+  "status .";
+  line-height: 25px;
+    align-self: center;
+    grid-template-columns: 70px auto;
+    width: 30em;
+}
+.task-flex-end{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.name-task{
+  max-width: 80%;
+    min-width: 10%;
+    word-wrap: break-word;
+}
   /* Стиль кнопки "Закрыть" */
   .close {
-    position: absolute;
-    right: 0;
-    top: 0;
     padding: 12px 16px 12px 16px;
     border-radius: 10px;
       height: 69px;
   }
   .update{
-      position: absolute;
-      right: 40px;
-      top: 0;
+
       border-radius: 10px;
       height: 69px;
       width: 41px;
   }
     .update:hover {
-        background-color: #b000ff;
-        color: #000000;
+        background-color: rgb(122, 85, 192);
     }
 
   .close:hover {
     background-color: #f44336;
     color: white;
   }
-  .container-board {
+  .container-board,.container-gant {
     margin: 10px auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
       height: 500px;
+  }
+  .container-gant{
+    width:95%;
   }
   .block-board{
     margin-bottom: 10px;
@@ -577,6 +531,11 @@ img:nth-child(4){animation-delay:0}
     min-height: 500px;
     margin-right: 15px;
     border-radius: 10px;
+  }
+  @media (max-width:420px){
+    .block-board{
+      width:100%;
+    }
   }
   .column3{
     margin-right: 0;
@@ -591,10 +550,10 @@ img:nth-child(4){animation-delay:0}
     list-style: none;
     margin:15px 0 5px 0;
     cursor: pointer;
-    background-color: rgba(122, 85, 192, 0.548);
+    background-color: rgba(122, 85, 192, 0.842);
     color:rgb(255, 255, 255);
     padding: 10px 30px;
-    border-radius: 25px;
+    border-radius: 10px;
     border:0px solid;
     word-break: break-all;
     min-height:40px;
@@ -604,7 +563,7 @@ img:nth-child(4){animation-delay:0}
     background-color: rgba(46, 34, 109, 0.781);
   }
   .column3 li{
-    background-color: rgb(30, 41, 65);
+    background-color: rgba(30, 41, 65, 0.897);
   }
 #formTask{
   display: inline;
@@ -699,7 +658,7 @@ img:nth-child(4){animation-delay:0}
 }
 #calendar2 thead tr:last-child {
     font-size: small;
-    color: rgb(85, 85, 85);
+    color: rgb(255, 255, 255);
 }
 #calendar2 thead tr:nth-child(1){
     font-size: 23px;
@@ -708,17 +667,21 @@ img:nth-child(4){animation-delay:0}
     padding-bottom: 30px;
 }
 #calendar2 thead tr:nth-child(1) td:nth-child(2) {
-    color: rgb(50, 50, 50);
+    color: rgb(122, 85, 192);
 }
 #calendar2 thead tr:nth-child(1) td:nth-child(1), #calendar2 thead tr:nth-child(1) td:nth-child(3){
     font-size: 40px;
-    color: #4a5568;
+    color: rgb(122, 85, 192);
 }
 #calendar2 thead tr:nth-child(1) td:nth-child(1):hover, #calendar2 thead tr:nth-child(1) td:nth-child(3):hover {
     cursor: pointer;
 }
+#calendar2 tbody{
+  background-color: rgba(0, 0, 0, 0.555);
+  color:white;
+}
 #calendar2 tbody td {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 20px 10px;
     border: 1px solid #c4c2c2;
     cursor: pointer;
@@ -726,19 +689,19 @@ img:nth-child(4){animation-delay:0}
     width: 10vw;
 }
 #calendar2 tbody td:hover {
-    background-color: #d0cfcf;
+    background-color: rgb(122, 85, 192);
     transition: .5s;
 }
 #calendar2 tbody td:nth-child(n+6), #calendar2 .holiday {
     color: rgb(231, 140, 92);
 }
 #calendar2 tbody td.today {
-    background: rgb(93, 5, 131);
+    background: rgb(122, 85, 192);
     color: #fff;
     transition: .5s;
 }
 #calendar2 tbody td.today:hover {
-    background-color: rgb(125, 3, 178);
+    background-color: rgb(107, 69, 177);
     transition: .5s;
 }
 .spanDay {
@@ -746,9 +709,10 @@ img:nth-child(4){animation-delay:0}
 }
 .calendar_task{
     float: left;
+    color: #ffffffa1;
 }
 .calendar_task:hover{
-    color: #744d9f;
+    color: #ffffff;
 }
 .today.calendar_task:hover{
     color: #e5cdff;
@@ -765,13 +729,15 @@ img:nth-child(4){animation-delay:0}
     overflow: auto;
 }
 .modal_task_content{
-    min-width: 180px;
-    min-height: 10vh;
-    border: 1px solid #696868;
-    border-radius: 5px;
-    background-color: white;
-    position: fixed;
-    padding: 5px;
+  max-width: 30%;
+  min-height: 10vh;
+  border: 1px solid #696868;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+  padding: 5px;
+  top:55%;
+  left:35%;
 }
 .error{
     font-size: 14px;
@@ -784,8 +750,8 @@ img:nth-child(4){animation-delay:0}
     margin-bottom: 5px;
     position: relative;
     width: 100%;
-    height: 40px;
     cursor: pointer;
+    word-break: break-all;
 }
 
 .executor_block{
@@ -823,13 +789,14 @@ img:nth-child(4){animation-delay:0}
     width: 100%;
 }
 .tags_li{
-    top: 33%;
-    position: absolute;
-    right: 0;
-    margin-right: 100px;
+   
     padding: 5px;
     font-size: 14px;
     border-radius: 5px;
+    width:120px;
+    text-align: center;
+    align-self: center;
+    height: fit-content;
 }
 
 .filtr a{
@@ -857,8 +824,8 @@ img:nth-child(4){animation-delay:0}
     left: 50%;
     min-width: 20%;
     min-height: 30px;
-    max-width: 50%;
-    max-height: 280%;
+    max-width: 40%;
+    max-height: 140%;
     background-color: white;
     border: 1px solid grey;
     border-radius: 5px;
@@ -882,4 +849,12 @@ img:nth-child(4){animation-delay:0}
   .addTask{
     height: 60px;
   }
+}
+.subtask-title{
+  color:white;
+  font-size: 20px;
+}
+.litask-subtask{
+  padding:15px;
+  align-items: center;
 }

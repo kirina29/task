@@ -63,7 +63,6 @@
                     <div id="mess"></div>
                 </div>
             </div>
-                <div>
                     <ul id="myULTask">
                         @if(count($res)==0)
                             <h2>Задачи отсутствуют</h2>
@@ -75,28 +74,32 @@
                                         <p>Дата начала: {{$r->start_date}}</p>
                                         <p>Дата дедлайна: {{$r->deadline_date}}</p>
                                     </div>
-                                    <form method="POST" action="{{route('checktask', $r)}}" id="formTask">
-                                    @csrf
-                                        <button type="submit" class="checkTask" name="checkTask" onclick="event.stopPropagation()">&#x2713;</button>
-                                    </form>
-                                    {{$r->name}}<br>
-                                    <small>{{$r->status}}</small>
-                                    <button type="button" class="update update_task" onclick="event.stopPropagation()" data-id="{{$r->id}}" data-start="{{$r->start_date}}" data-deadline="{{$r->deadline_date}}" data-name="{{$r->name}}" data-description="{{$r->descriptions}}" data-price="{{$r->price}}" data-flags="{{$r->id_flags}}">
-                                        &#9998;
-                                    </button>
-                                    @foreach($tags as $t)
+                                    <div class="task-flex-start">
+                                        <form method="POST" action="{{route('checktask', $r)}}" id="formTask">
+                                        @csrf
+                                            <button type="submit" class="checkTask" name="checkTask" onclick="event.stopPropagation()">&#x2713;</button>
+                                        </form>
+                                        <div class="name-task">{{$r->name}}</div>
+                                        <div class="status-task"><small>{{$r->status}}</small></div>
+                                    </div>
+                                    <div class="task-flex-end">
+                                     @foreach($tags as $t)
                                         @if($t->id===$r->id_flags)
                                             <span style="background-color: {{$t->color}}" class="tags_li" data-id="{{$r->id_flags}}">{{$t->name}}</span>
                                         @endif
                                     @endforeach
-
-                                    <form method="POST" action="{{route('destroytask', $r)}}" onclick="event.stopPropagation()">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="close" onclick="event.stopPropagation()">
-                                            x
-                                        </button>
-                                    </form>
+                                    <button type="button" class="update update_task" onclick="event.stopPropagation()" data-id="{{$r->id}}" data-start="{{$r->start_date}}" data-deadline="{{$r->deadline_date}}" data-name="{{$r->name}}" data-description="{{$r->descriptions}}" data-price="{{$r->price}}" data-flags="{{$r->id_flags}}">
+                                        &#9998;
+                                    </button>
+                                        <form method="POST" action="{{route('destroytask', $r)}}" onclick="event.stopPropagation()">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="close" onclick="event.stopPropagation()">
+                                                x
+                                            </button>
+                                        </form>
+                                    </div>
+                                    
                                 </li>
                                 @foreach($resultsubtask as $rs)
                                     @if($rs->id_tasks==$r->id)
@@ -120,35 +123,37 @@
                                                 </p>
 
                                             </div>
-                                            <form method="POST" action="{{route('checksubtask', $rs)}}" id="formTask" data-flag-id="{{$r->id_flags}}">
-                                                @csrf
-                                                <button type="submit" class="checkTask" name="checkTask" onclick="event.stopPropagation()">&#x2713;</button>
-                                            </form>
-                                            {{$rs->name}}
-                                            <br>
-                                            <small>{{$rs->status}}</small>
-                                            <button type="button" class="update update_sub" onclick="event.stopPropagation()" data-id="{{$rs->id}}" data-start="{{$rs->start_date}}" data-deadline="{{$rs->deadline_date}}" data-name="{{$rs->name}}">
-                                                &#9998;
-                                                @foreach($execut as $ex)
-                                                    @if($ex->id_subtasks==$rs->id)
-                                                        <span style="display: none" data-id="{{$ex->id_users}}" data-name="{{$users[$ex->id_users][0]->name}}"></span>
-                                                    @endif
-                                                @endforeach
-                                            </button>
-                                            <form method="POST" action="{{route('destroysubtask', $rs)}}" onclick="event.stopPropagation()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="close" onclick="event.stopPropagation()">
-                                                    x
+                                            <div class="task-flex-start">
+                                                <form method="POST" action="{{route('checksubtask', $rs)}}" id="formTask" data-flag-id="{{$r->id_flags}}">
+                                                    @csrf
+                                                    <button type="submit" class="checkTask" name="checkTask" onclick="event.stopPropagation()">&#x2713;</button>
+                                                </form>
+                                                <div>{{$rs->name}}</div>
+                                                <div><small>{{$rs->status}}</small></div>
+                                            </div>
+                                            <div class="task-flex-end">
+                                                <button type="button" class="update update_sub" onclick="event.stopPropagation()" data-id="{{$rs->id}}" data-start="{{$rs->start_date}}" data-deadline="{{$rs->deadline_date}}" data-name="{{$rs->name}}">
+                                                    &#9998;
+                                                    @foreach($execut as $ex)
+                                                        @if($ex->id_subtasks==$rs->id)
+                                                            <span style="display: none" data-id="{{$ex->id_users}}" data-name="{{$users[$ex->id_users][0]->name}}"></span>
+                                                        @endif
+                                                    @endforeach
                                                 </button>
-                                            </form>
+                                                <form method="POST" action="{{route('destroysubtask', $rs)}}" onclick="event.stopPropagation()">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="close" onclick="event.stopPropagation()">
+                                                        x
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </li>
                                     @endif
                                 @endforeach
                             @endforeach
                         @endif
                     </ul>
-                </div>
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                     <h4 class=" mb-8 items-center px-1 pt-1 border-b-2 border-black font-medium leading-5 text-gray-900 focus:outline-none focus:border-black transition duration-150 ease-in-out font-semibold text-xl text-gray-800 leading-tight text-center">Добавление задачи</h4>
@@ -179,8 +184,8 @@
                                     <input type="date" class="form-control block mt-1 w-full" value="{{old('deadline_date')}}" name="deadline_date" id="form-deadline_date" placeholder="Дата сдачи задачи">
                                 </div>
                                 <p class="error" id="deadline_date"></p>
-                                <div class="flex items-center justify-end mt-4">
-                                    <x-button class="btn btn-success ml-3" type="submit">Добавить задачу</x-button>
+                                <div class="flex items-center justify-center mt-4">
+                                    <x-button class="modal-btn btn btn-success ml-3" type="submit">Добавить задачу</x-button>
                                 </div>
                         </form>
                     </div>
@@ -224,8 +229,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex items-center justify-end mt-4">
-                                 <x-button class="btn btn-success ml-3" type="submit">Изменить задачу</x-button>
+                            <div class="flex items-center justify-center mt-4">
+                                 <x-button class="modal-btn btn btn-success ml-3" type="submit">Изменить задачу</x-button>
                             </div>
 
                         </form>
@@ -265,8 +270,8 @@
                                 <button class="btn btn-success ml-2" type="button" onclick="addExecut(event)">Добавить исполнителя</button>
                             </div>
                             <p class="error" id="executName"></p>
-                            <div class="flex items-center justify-end mt-4">
-                                <x-button class="btn btn-success ml-3" type="submit">Добавить подзадачу</x-button>
+                            <div class="flex items-center justify-center mt-4">
+                                <x-button class="modal-btn btn btn-success ml-3" type="submit">Добавить подзадачу</x-button>
                             </div>
                         </form>
                     </div>
@@ -295,8 +300,8 @@
                                 <button class="btn btn-success ml-2" type="button" onclick="addExecut(event)">Добавить исполнителя</button>
                             </div>
                             <p class="error" id="executName"></p>
-                            <div class="flex items-center justify-end mt-4">
-                                <x-button class="btn btn-success ml-3" type="submit">Изменить подзадачу</x-button>
+                            <div class="flex items-center justify-center mt-4">
+                                <x-button class="modal-btn btn btn-success ml-3" type="submit">Изменить подзадачу</x-button>
                             </div>
                         </form>
                     </div>
@@ -312,8 +317,8 @@
                                 <textarea name="textcomment" rows="3" class="form-control block mt-1 w-full"></textarea>
                             </div>
                             <p class="error" id="textcomment"></p>
-                            <div class="flex items-center justify-end mt-4">
-                                <x-button class="btn btn-success ml-3" type="submit">Отправить комментарий</x-button>
+                            <div class="flex items-center justify-center mt-4">
+                                <x-button class="modal-btn btn btn-success ml-3" type="submit">Отправить комментарий</x-button>
                             </div>
                         </form>
                     </div>

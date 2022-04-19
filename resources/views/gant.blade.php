@@ -21,7 +21,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="border-b border-gray-200 bg" style="border: 1px solid #b2b2b2">
-                    <div class="container-board">
+                    <div class="container-gant">
                         <div id="user_id" style="display:none;">
                             {{$id}}
                         </div>
@@ -65,8 +65,12 @@
                                 chart.draw();
                                 // fit elements to the width of the timeline
                                 chart.fitAll();
-
                                 chart.dataGrid().tooltip().useHtml(true);
+                                
+                                var elements = chart.getTimeline().elements();
+                                elements.normal().fill("#4b2f80 0.5");
+                                elements.selected().fill("#1e1333 0.7");
+
 
                                 chart.dataGrid().tooltip().format(function() {
 

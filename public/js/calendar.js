@@ -59,13 +59,7 @@ function Calendar2(id, year, month) {
     for (let calenT of calendar_task) {
         calenT.onclick = function(event) {
             event.stopPropagation();
-            let pos=event.target.getBoundingClientRect()
-            let position={
-                top:pos.top + pageYOffset,
-                left:pos.left + pageYOffset
-            }
-            modal_task_content.style.top=position.top+'px'
-            modal_task_content.style.left=position.left+'px'
+           
             modal_task.style.display='block'
             modal_task_content.replaceChildren()
             for(let i=0;i<task.length;i++)
@@ -73,7 +67,7 @@ function Calendar2(id, year, month) {
                 if(task[i].start_date==calenT.parentNode.dataset.dateTd)
                 {
                     modal_task_content.insertAdjacentHTML("beforeend", `<div class="modal-content-task" onclick="event.stopPropagation();">
-                                                                                         <div class="tooltip_subtask" style="width: 90%; right: auto; left: auto">
+                                                                                         <div class="tooltip_subtask" style="width: 100%;">
                                                                                             <p>Описание: ${task[i].descriptions}</p>
                                                                                             <p>Дата начала: ${task[i].start_date}</p>
                                                                                             <p>Дата дедлайна: ${task[i].deadline_date}</p>
