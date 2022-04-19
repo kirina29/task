@@ -51,7 +51,7 @@
                                     <div class="section1-descr">
                                         Таск-трекер для команды, для бизнеса, для управления собственными делами
                                     </div>
-                                    <a class="section1-btn" href="#">Попробовать бесплатно &#9658;</a>
+                                    <a class="section1-btn" href="{{ route('login') }}">Попробовать бесплатно &#9658;</a>
                                 </div>
                                 <div class=section1-images>
                                     <img src="{{URL::asset('/images/gant.png')}}" width="500">
@@ -69,29 +69,28 @@
                                     </div>
                                 </div>
                                     <div class="container_slider_css">
-                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/1.jpg" alt="">
-                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/2.jpg" alt="">
-                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/3.jpg" alt="">
-                                        <img class="photo_slider_css" src="https://obninsksite.ru/assets/theme/images/blog/slider/4.jpg" alt="">
+                                        <img class="photo_slider_css" src="{{URL::asset('/images/slide1.png')}}" alt="" width="600">
+                                        <img class="photo_slider_css" src="{{URL::asset('/images/slide2.png')}}" alt="" width="600">
+                                        <img class="photo_slider_css" src="{{URL::asset('/images/slide3.png')}}" alt="" width="600">
                                     </div>
                             </div>
                     </section>
                     <section class="section3">
                             <div class="section3-div">
                                 <div class=section3-block>
-                                    <img class="section3-img" src="{{URL::asset('/images/logo.png')}}" width="50">
-                                    <div class="feature-title">sfdef</div>
-                                    <div class="feature-text">sfdddddddddddd ddddddddddddddd ddddddd ff ffffff fef</div>
+                                    <img class="section3-img" src="{{URL::asset('/images/tags.png')}}" width="50">
+                                    <div class="feature-title">ТЕГИ</div>
+                                    <div class="feature-text">Помечайте ими задачи — так легче отфильтровать или найти определенные дела.</div>
                                 </div>
                                 <div class=section3-block>
-                                    <img class="section3-img" src="{{URL::asset('/images/logo.png')}}" width="50">
-                                    <div class="feature-title">sfdef</div>
-                                    <div class="feature-text">sfdddddddddddd ddddddddddddddd ddddddd ff ffffff fef</div>
+                                    <img class="section3-img" src="{{URL::asset('/images/gant-icon.png')}}" width="50">
+                                    <div class="feature-title">ПЛАНИРОВАНИЕ</div>
+                                    <div class="feature-text">С помощью ганта вы можете связывать задачи, чтобы подробно отслеживать каждый шаг. Так удобнее вести крупные проекты и работать в продуктовых командах.</div>
                                 </div>
                                 <div class=section3-block>
-                                    <img class="section3-img" src="{{URL::asset('/images/logo.png')}}" width="50">
-                                    <div class="feature-title">sfdef</div>
-                                    <div class="feature-text">sfdddddddddddd ddddddddddddddd ddddddd ff ffffff fef</div>
+                                    <img class="section3-img" src="{{URL::asset('/images/isp.png')}}" width="50">
+                                    <div class="feature-title">ИСПОЛНИТЕЛИ</div>
+                                    <div class="feature-text">Назначайте исполнителей на подзадачи проекта, чтобы отслеживать работу своих сотрудников.</div>
                                 </div>
                             </div>
                     </section>
@@ -104,7 +103,7 @@
                             <div><a href="mailto: taskmanager@mail.ru">taskmanager@mail.ru</a></div>
                         </div>       
                         <div class="footer-right">
-                        <a class="footer-btn" href="#">Начать работу &#9658;</a>
+                        <a class="footer-btn" href="{{ route('login') }}">Начать работу &#9658;</a>
                         <div>© 2022 TaskManager. Все права защищены.</div>
                         </div>   
                     </div>
